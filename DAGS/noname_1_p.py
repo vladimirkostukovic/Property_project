@@ -81,16 +81,5 @@ sed -i "s/__DATE__/$(date +%Y-%m-%d)/g" /tmp/tmp_5.sql
 sed -i "s/__DATE_RAW__/$(date +%d%m%Y)/g" /tmp/tmp_5.sql
 PGPASSWORD={{ var.value.db_password }} psql -h {{ var.value.db_host }} -U reality_client -d reality_data -p 5432 -f /tmp/tmp_5.sql
 """,
-    )
 
-    # ---- BEZNEMOVITOSTI pipeline ----
-    # аналогично: insert_beznemovitosti, archive_missing_beznemovitosti и т.д.
-
-    # ---- HYPERNEMOVITOSTI pipeline ----
-    # insert_hypernemovitosti, archive_missing_hypernemovitosti, и т.д.
-
-    # ---- DNESNEMOVITOSTI pipeline ----
-    # insert_dnesnemovitosti, archive_missing_dnesnemovitosti, и т.д.
-
-    # ---- Пример зависимостей ----
     check_today_table >> run_sql_script_1 >> run_sql_script_2 >> run_sql_script_3 >> run_sql_script_4 >> run_sql_script_5
